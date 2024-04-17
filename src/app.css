@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1 {
+  text-align: center;
+}
+body {
+  background-image: url(./vecteezy_healthy-organic-food-seamless-pattern-vector-white_8858692.jpg);
+  background-size: 350px;
+}

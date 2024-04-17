@@ -1,0 +1,113 @@
+/* items.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.recipes {
+  color: white;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.recipe {
+  /* background-color: #fff; */
+  background-color: black;
+  display: flex;
+  /* max-width: 100%; */
+  width: 80%;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  /* width: calc(33.33% - 20px); */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recipe:nth-child(3n) {
+  margin-right: 0;
+}
+
+.label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 10px;
+  font-size: 26px; /* Adjust font size for smaller screens */
+}
+
+.recipe-image {
+  border-radius: 50%;
+  max-width: 100%;
+  border: 1px solid black;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.ingredients {
+  margin-bottom: 5px;
+  font-size: 14px; /* Adjust font size for smaller screens */
+  font-family: sans-serif;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+.label,
+h3 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .recipes {
+    /* width: 380px; */
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .recipe {
+    width: 90%;
+  }
+
+  .recipe:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .recipes {
+    padding: 5px;
+    gap: 5px;
+  }
+
+  .recipe {
+    width: 90%;
+  }
+}
+
+.video-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.youtube-video {
+  border: none;
+}
