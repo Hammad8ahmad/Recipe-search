@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/recipe-search/static/css/main.4a9d1005.css",
+    "main.js": "/recipe-search/static/js/main.916d7e54.js",
+    "static/media/vecteezy_healthy-organic-food-seamless-pattern-vector-white_8858692.jpg": "/recipe-search/static/media/vecteezy_healthy-organic-food-seamless-pattern-vector-white_8858692.1737c00f2f6b042f03d5.jpg",
+    "index.html": "/recipe-search/index.html",
+    "main.4a9d1005.css.map": "/recipe-search/static/css/main.4a9d1005.css.map",
+    "main.916d7e54.js.map": "/recipe-search/static/js/main.916d7e54.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a9d1005.css",
+    "static/js/main.916d7e54.js"
+  ]
+}
