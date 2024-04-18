@@ -2,16 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import "./interface.css";
 import Items from "./items";
 import { fetching } from "./fetchData";
-import { useCallback } from "react";
-import apiData from "./testing";
-import VideoTemplate from "./videoTemplate";
+import apiData from "./fetchVideo";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
   const [query, setQuery] = useState("noodles");
   const [data, setData] = useState("");
   const [videoId, setVideoId] = useState("noodles");
-  const [showModal, setShowModal] = useState(false);
   const inputRef = useRef(null);
 
   //  FORM HANDLER
@@ -64,13 +61,6 @@ function Interface() {
     });
   }, [query]);
 
-  // useEffect(() => {
-  //   if (!recipe) {
-  //     setShowModal(true);
-  //   } else {
-  //     setShowModal(false);
-  //   }
-  // }, []);
   return (
     <React.Fragment>
       <div className="title-container">
@@ -101,7 +91,6 @@ function Interface() {
         </button>
       </form>
 
-      {/* <VideoTemplate videoId={videoId}></VideoTemplate> */}
       <Items data={data} videoId={videoId}></Items>
     </React.Fragment>
   );

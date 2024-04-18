@@ -7,7 +7,8 @@
 
 .recipes {
   color: white;
-  max-width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   /* flex-wrap: wrap; */
@@ -22,7 +23,7 @@
   background-color: black;
   display: flex;
   /* max-width: 100%; */
-  width: 80%;
+  width: 100%;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
@@ -92,14 +93,37 @@ h3 {
 }
 
 @media only screen and (max-width: 480px) {
-  .recipes {
+  .label {
+    font-size: 30px;
+  }
+  .recipe-image {
+    width: 70%;
+  }
+  h3 {
+    font-size: 22px;
+  }
+  .ingredients-header {
+    font-size: 22px;
+  }
+  .ingredients {
+    font-size: 18px;
+  }
+
+  /* JUST FOR REFERENCE */
+
+  /* .recipes {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 5px;
     gap: 5px;
   }
 
   .recipe {
-    width: 90%;
-  }
+    width: 100%;
+  } */
+
+  /* //////// */
 }
 
 .video-tab {

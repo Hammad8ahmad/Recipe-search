@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./items.css";
 import PacmanLoader from "react-spinners/PacmanLoader";
-import apiData from "./testing";
+import apiData from "./fetchVideo";
 
 function Items({ data, videoId }) {
   const [loading, Setloading] = useState(true);
@@ -42,7 +42,7 @@ function Items({ data, videoId }) {
                 <h1 className="label">{label}</h1>
                 <img src={SMALL.url} alt="" className="recipe-image" />
                 <h3>Calories : {Math.round(calories)}g</h3>
-                <h3>Ingredients : </h3>
+                <h3 className="ingredients-header">Ingredients : </h3>
                 <ul>
                   {ingredients.map((i, index) => {
                     return (
