@@ -7,8 +7,8 @@ import apiData from "./fetchVideo";
 function Interface() {
   const [recipe, setRecipe] = useState("");
   const [query, setQuery] = useState("noodles");
-  const [data, setData] = useState("");
-  const [videoId, setVideoId] = useState("noodles");
+  const [data, setData] = useState(null);
+  const [videoId, setVideoId] = useState(null);
   const inputRef = useRef(null);
 
   //  FORM HANDLER
@@ -51,15 +51,18 @@ function Interface() {
       setRecipe("");
     }
   };
-  useEffect(() => {
-    // console.log(apiData());
-    fetching(query).then((res) => {
-      setData(res);
-      apiData(query).then((res) => {
-        setVideoId(res);
-      });
-    });
-  }, [query]);
+  
+  // INITIAL RENDER FETCHING 
+
+  // useEffect(() => {
+  //   apiData("noodles").then((res) => {
+  //     setVideoId(res);
+  //   });
+  //   // console.log(apiData());
+  //   fetching(query).then((res) => {
+  //     setData(res);
+  //   });
+  // }, []);
 
   return (
     <React.Fragment>
@@ -69,6 +72,11 @@ function Interface() {
           This Edamam recipe API has the data of tens of thousands of foods,
           including international dishes. Enter <b> ANY </b>sort of food (e.g.:
           pasta, chicken enchilada, dumpling, etc.) to see its magic.
+        </div>
+        <div className="note">
+          <b>|IMPORTANT NOTE| </b> ONLY PEOPLE WHO CAN MAKE GOOD BROWNIES CAN
+          USE THIS SO PLZ IF YOU CANNOT MAKE GOOD BROWNIES(CRUNCHY) LEAVE THE
+          THE SITE IMMEDIATELY!🐥
         </div>
       </div>
       <form className="form" onSubmit={submitHandler}>
@@ -89,8 +97,7 @@ function Interface() {
         <button className="btn btn-primary btn-ghost">
           <span>Search</span>
         </button>
-      </form>
-
+      </form>{" "}
       <Items data={data} videoId={videoId}></Items>
     </React.Fragment>
   );

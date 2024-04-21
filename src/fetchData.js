@@ -10,7 +10,7 @@ export const fetching = async (defaultQuery) => {
     const data = await api.json();
     // console.log(data.hits);
 
-    return await data.hits.slice(0, 1);
+    return await data.hits.slice(0, 5);
   } catch (e) {
     console.log(e, "something went wrong");
     return e;

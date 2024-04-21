@@ -4,16 +4,13 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import apiData from "./fetchVideo";
 
 function Items({ data, videoId }) {
-  const [loading, Setloading] = useState(true);
-  useEffect(() => {
-    // console.log(videoId, "in item component");
+  const [loading, setLoading] = useState(true);
 
-    console.log(videoId);
-    // console.log(data);
-    if (!data || !videoId || videoId.length === 0) {
-      Setloading(true);
+  useEffect(() => {
+    if (data === null || videoId === null) {
+      setLoading(true);
     } else {
-      Setloading(false);
+      setLoading(false);
     }
   }, [data, videoId]);
 
@@ -21,59 +18,58 @@ function Items({ data, videoId }) {
     <React.Fragment>
       {loading ? (
         <div className="loader">
-          <PacmanLoader
+          {/* <PacmanLoader
             color={"black"}
             loading={loading}
             size={50}
             aria-label="Loading Spinner"
             data-testid="loader"
-          />
+          /> */}
         </div>
       ) : (
         <div className="recipes">
-          {data.map((item, index) => {
-            const individualRecipe = item.recipe;
-            const { images, label, calories, ingredients } = individualRecipe;
-            const { SMALL } = images;
-            const recipeVideos = videoId[index] || []; // Get videos for the current recipe, or an empty array if not available
+          {data &&
+            data.map((item, index) => {
+              const individualRecipe = item.recipe;
+              const { images, label, calories, ingredients } = individualRecipe;
+              const { SMALL } = images;
+              const recipeVideos = Array.isArray(videoId)
+                ? videoId[index] || []
+                : [];
 
-            return (
-              <div className="recipe" key={index}>
-                <h1 className="label">{label}</h1>
-                <img src={SMALL.url} alt="" className="recipe-image" />
-                <h3>Calories : {Math.round(calories)}g</h3>
-                <h3 className="ingredients-header">Ingredients : </h3>
-                <ul>
-                  {ingredients.map((i, index) => {
-                    return (
+              return (
+                <div className="recipe" key={index}>
+                  <h1 className="label">{label}</h1>
+                  <img src={SMALL.url} alt="" className="recipe-image" />
+                  <h3>Calories : {Math.round(calories)}g</h3>
+                  <h3 className="ingredients-header">Ingredients : </h3>
+                  <ul>
+                    {ingredients.map((i, index) => (
                       <li className="ingredients" key={index}>
                         {i.text}
                       </li>
-                    );
-                  })}
-                </ul>
-                <div>
-                  {(Array.isArray(recipeVideos) ? recipeVideos : []).map(
-                    (video, videoIndex) => {
-                      const { id, snippet } = video;
-                      const videoSrc = `https://www.youtube.com/embed/${id.videoId}`;
-                      return (
-                        <div className="video-tab" key={videoIndex}>
-                          {/* <h4>{snippet.title}</h4> */}
-                          <iframe
-                            className="youtube-video"
-                            src={videoSrc}
-                            allowFullScreen
-                            title="Video player"
-                          />
-                        </div>
-                      );
-                    }
-                  )}
+                    ))}
+                  </ul>
+                  <div>
+                    {Array.isArray(recipeVideos) &&
+                      recipeVideos.map((video, videoIndex) => {
+                        const { id, snippet } = video;
+                        const videoSrc = `https://www.youtube.com/embed/${id.videoId}`;
+                        return (
+                          <div className="video-tab" key={videoIndex}>
+                            <iframe
+                              className="youtube-video"
+                              src={videoSrc}
+                              allowFullScreen
+                              title="Video player"
+                            />
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       )}
     </React.Fragment>
