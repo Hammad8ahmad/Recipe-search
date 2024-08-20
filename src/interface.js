@@ -51,18 +51,6 @@ function Interface() {
       setRecipe("");
     }
   };
-  
-  // INITIAL RENDER FETCHING 
-
-  // useEffect(() => {
-  //   apiData("noodles").then((res) => {
-  //     setVideoId(res);
-  //   });
-  //   // console.log(apiData());
-  //   fetching(query).then((res) => {
-  //     setData(res);
-  //   });
-  // }, []);
 
   return (
     <React.Fragment>
