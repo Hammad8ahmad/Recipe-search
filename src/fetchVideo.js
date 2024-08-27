@@ -9,12 +9,10 @@ const apiData = async (defaultVideo) => {
       },
     });
 
-    return await response.data.items; // Output the response data, not the entire response object
+    return await response.data.items;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
-export default apiData; // You don't need to export apiData if you're not using it elsewhere in your code
-
-// JUST FOR TESTING PURPOSES
+export default apiData; 

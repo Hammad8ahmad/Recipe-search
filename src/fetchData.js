@@ -8,7 +8,6 @@ export const fetching = async (defaultQuery) => {
       `https://api.edamam.com/api/recipes/v2?type=public&q=${defaultQuery}&app_id=a9b30405&app_key=%2080bab0508a352ffd15e450386a26bc4c`
     );
     const data = await api.json();
-    // console.log(data.hits);
 
     return await data.hits.slice(0, 5);
   } catch (e) {
