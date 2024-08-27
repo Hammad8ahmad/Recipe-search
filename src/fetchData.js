@@ -1,17 +1,16 @@
-import React from "react";
+const APP_KEY = process.env.REACT_APP_EDAMAM_APP_KEY;
+const APP_ID = process.env.REACT_APP_EDAMAM_APP_ID;
 
-const key = "80bab0508a352ffd15e450386a26bc4c	";
-const id = "a9b30405";
-export const fetching = async (defaultQuery) => {
+export const fetchingRecipes = async (query) => {
   try {
-    const api = await fetch(
-      `https://api.edamam.com/api/recipes/v2?type=public&q=${defaultQuery}&app_id=a9b30405&app_key=%2080bab0508a352ffd15e450386a26bc4c`
+    const response = await fetch(
+      `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
-    const data = await api.json();
-
-    return await data.hits.slice(0, 5);
-  } catch (e) {
-    console.log(e, "something went wrong");
-    return e;
+    const data = await response.json();
+    console.log(data);
+    return data.hits.slice(0, 5); // Return only the top 5 results
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    return [];
   }
 };

@@ -5,7 +5,7 @@ import Interface from "./interface";
 function App() {
   return (
     <React.Fragment>
-      <Interface></Interface>
+      <Interface />
     </React.Fragment>
   );
 }

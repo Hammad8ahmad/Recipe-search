@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./items.css";
 import PacmanLoader from "react-spinners/PacmanLoader";
-import apiData from "./fetchVideo";
 
 function Items({ data, videoId }) {
   const [loading, setLoading] = useState(true);
@@ -17,15 +16,7 @@ function Items({ data, videoId }) {
   return (
     <React.Fragment>
       {loading ? (
-        <div className="loader">
-          {/* <PacmanLoader
-            color={"black"}
-            loading={loading}
-            size={50}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          /> */}
-        </div>
+        <div className="loader">YOU CURRENTLY HAVE NO SEARCHED RECIPES :)</div>
       ) : (
         <div className="recipes">
           {data &&
@@ -40,21 +31,28 @@ function Items({ data, videoId }) {
               return (
                 <div className="recipe" key={index}>
                   <h1 className="label">{label}</h1>
-                  <img src={SMALL.url} alt="" className="recipe-image" />
+                  <img
+                    loading="lazy"
+                    src={SMALL.url}
+                    alt=""
+                    className="recipe-image"
+                  />
+
                   <h3>Calories : {Math.round(calories)}g</h3>
                   <h3 className="ingredients-header">Ingredients : </h3>
                   <ul>
                     {ingredients.map((i, index) => (
                       <li className="ingredients" key={index}>
-                        {i.text}
+                        {i.text + "."}
                       </li>
                     ))}
                   </ul>
                   <div>
                     {Array.isArray(recipeVideos) &&
                       recipeVideos.map((video, videoIndex) => {
-                        const { id, snippet } = video;
-                        const videoSrc = `https://www.youtube.com/embed/${id.videoId}`;
+                        const { id } = video;
+                        const videoSrc =
+                          "https://www.youtube-nocookie.com/embed/${id.videoId}";
                         return (
                           <div className="video-tab" key={videoIndex}>
                             <iframe

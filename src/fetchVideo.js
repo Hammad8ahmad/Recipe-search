@@ -1,18 +1,17 @@
-// index.js
 import youtube from "./youtube";
 
-const apiData = async (defaultVideo) => {
+const fetchYouTubeVideos = async (query) => {
   try {
     const response = await youtube.get("/search", {
       params: {
-        q: defaultVideo,
+        q: query,
       },
     });
-
-    return await response.data.items;
+    return response.data.items;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching YouTube videos:", error);
+    return [];
   }
 };
 
-export default apiData; 
+export default fetchYouTubeVideos;
