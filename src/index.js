@@ -1,9 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./app";
+import ReactDOM from "react-dom/client";
+import App from "./app.js";
 
 function Main() {
-  return <App></App>;
+  return <App />;
 }
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+root.render(<Main />);
