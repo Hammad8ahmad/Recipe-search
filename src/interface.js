@@ -57,7 +57,7 @@ function Interface() {
   return (
     <React.Fragment>
       <div className="title-container">
-        <h1 className="header">RECIPE SEARCH</h1>
+        <h1 className="header">RECIPE SEARCH :)</h1>
         <div className="paragraph">
           This Edamam recipe API has the data of tens of thousands of foods,
           including international dishes. Enter <b> ANY </b> sort of food (e.g.:
