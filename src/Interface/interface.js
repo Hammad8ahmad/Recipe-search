@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./interface.css";
-import Items from "./items";
-import { fetchingRecipes } from "./fetchData";
-import fetchYouTubeVideos from "./fetchVideo";
+import Items from "../Recipes/items";
+import { fetchingRecipes } from "../Fetching/fetchData";
+import fetchYouTubeVideos from "../Fetching/fetchVideo";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
@@ -62,11 +62,6 @@ function Interface() {
           This Edamam recipe API has the data of tens of thousands of foods,
           including international dishes. Enter <b> ANY </b> sort of food (e.g.:
           pasta, chicken enchilada, dumpling, etc.) to see its magic.
-        </div>
-        <div className="note">
-          <b>|EASTER EGG FOR MOBILE USERS ;)| </b> ONLY PEOPLE WHO CAN MAKE GOOD
-          BROWNIES CAN USE THIS SO PLEASE LEAVE THE SITE IMMEDIATELY IF YOU
-          CANNOT MAKE GOOD BROWNIES(CRUNCHY)!
         </div>
       </div>
       <form id="form" className="form" onSubmit={submitHandler}>

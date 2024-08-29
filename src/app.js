@@ -1,6 +1,6 @@
 import React from "react";
 import "./app.css";
-import Interface from "./interface";
+import Interface from "./Interface/interface";
 
 function App() {
   return (

@@ -56,6 +56,14 @@ ul {
   list-style-type: disc;
   padding-left: 20px;
 }
+.no-videos-message {
+  text-align: center;
+  color: black;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: lightgreen;
+  padding: 10px;
+}
 
 .ingredients {
   margin-bottom: 5px;
