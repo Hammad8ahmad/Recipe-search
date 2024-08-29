@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./interface.css";
-import Items from "./items";
-import { fetchingRecipes } from "./fetchData";
-import fetchYouTubeVideos from "./fetchVideo";
+import Items from "../Recipe components/items";
+import { fetchingRecipes } from "../Fetching files/fetchData";
+import fetchYouTubeVideos from "../Fetching files/fetchVideo";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
@@ -23,6 +23,7 @@ function Interface() {
     setData(recipeData);
 
     const recipeNames = extractRecipeNames(recipeData);
+    console.log(recipeNames);
     const videoData = await fetchVideosForRecipes(recipeNames);
     setVideoId(videoData);
 
@@ -49,31 +50,25 @@ function Interface() {
   };
 
   const fetchVideosForRecipes = async (recipeNames) => {
-    const videoPromises = recipeNames.map((name) => fetchYouTubeVideos(name));
-    const videoResults = await Promise.all(videoPromises);
+    // const videoPromises = recipeNames.map((name) => fetchYouTubeVideos(name));
+    const videoResults = fetchYouTubeVideos(recipeNames);
+    // const videoResults = await Promise.all(videoPromises);
     return videoResults;
   };
 
   return (
     <React.Fragment>
       <div className="title-container">
-        <h1 className="header">RECIPE SEARCH :)</h1>
+        <h1 className="header">RECIPE SEARCH</h1>
         <div className="paragraph">
           This Edamam recipe API has the data of tens of thousands of foods,
           including international dishes. Enter <b> ANY </b> sort of food (e.g.:
           pasta, chicken enchilada, dumpling, etc.) to see its magic.
         </div>
-        <div className="note">
-          <b>|EASTER EGG FOR MOBILE USERS ;)| </b> ONLY PEOPLE WHO CAN MAKE GOOD
-          BROWNIES CAN USE THIS SO PLEASE LEAVE THE SITE IMMEDIATELY IF YOU
-          CANNOT MAKE GOOD BROWNIES(CRUNCHY)!
-        </div>
       </div>
       <form id="form" className="form" onSubmit={submitHandler}>
         <div className="form-input-material">
           <label htmlFor="recipeSearch">
-            {" "}
-            {/* htmlFor should match the id of the input */}
             <input
               ref={inputRef}
               type="text"

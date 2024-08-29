@@ -7,7 +7,7 @@ export const fetchingRecipes = async (query) => {
       `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json();
-    console.log(data);
+    console.log("this is the recipe data ", data);
     return data.hits.slice(0, 5); // Return only the top 5 results
   } catch (error) {
     console.error("Error fetching recipes:", error);

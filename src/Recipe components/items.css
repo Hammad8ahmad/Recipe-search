@@ -17,7 +17,11 @@
   gap: 20px;
   padding: 20px;
 }
-
+.no-videos-message {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: darkgreen;
+  padding: 10px;
+}
 .recipe {
   /* background-color: #fff; */
   background-color: #606c38;
