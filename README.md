@@ -17,6 +17,7 @@ A responsive React-based web application to display a collection of recipes. Eac
 
 You can check out a live demo of the project [here](https://recipe-search-io.netlify.app/).
 ![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
+## Example:
 ![recipe](https://github.com/user-attachments/assets/4a68e74d-1e82-4de4-a301-d275b79fa26d)
 
 ## Features
@@ -61,8 +62,8 @@ Your application should now be running on `http://localhost:3000`.
 
 ## Project Structure
 
-- **Fetching/**: Contains all the data fetching files for the recipes and youtube api.
-- **Interface/**: Contains the interface file and the related Css file for it.
+- **Fetching**: Contains all the data fetching files for the recipes and youtube api.
+- **Interface**: Contains the interface file and the related Css file for it.
 - **Recipes**: Contains all the information about the individual recipes.
 - **App.js**: Main component that renders the application.
 - **index.js**: Entry point of the application.
