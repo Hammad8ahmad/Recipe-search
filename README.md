@@ -1,4 +1,4 @@
-# Recipe Gallery
+# Recipe Search
 
 A responsive React-based web application to display a collection of recipes. Each recipe is showcased with a rounded image, title, ingredients list, and additional details. The app includes features to handle cases where no videos are available.
 
@@ -11,10 +11,12 @@ A responsive React-based web application to display a collection of recipes. Eac
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
+![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
 
 ## Demo
 
 You can check out a live demo of the project [here](#).
+![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
 
 ## Features
 
