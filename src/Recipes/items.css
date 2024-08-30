@@ -11,29 +11,22 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
+
   justify-content: center;
   align-items: center;
   gap: 20px;
   padding: 20px;
 }
-.no-videos-message {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: darkgreen;
-  padding: 10px;
-}
+
 .recipe {
-  /* background-color: #fff; */
   background-color: #606c38;
   display: flex;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  /* max-width: 100%; */
   width: 100%;
   color: #fefae0;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
-  /* width: calc(33.33% - 20px); */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -50,7 +43,9 @@
 
 .recipe-image {
   border-radius: 50%;
-  max-width: 100%;
+  /* max-width: 100%; */
+  width: 150px;
+  height: 150px;
   border: 1px solid black;
   object-fit: cover;
   margin-bottom: 10px;
@@ -59,6 +54,20 @@
 ul {
   list-style-type: disc;
   padding-left: 20px;
+}
+
+.no-videos-message {
+  text-align: center;
+  color: #2d2d2d;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 600px;
 }
 
 .ingredients {
@@ -102,7 +111,8 @@ ul {
   }
 
   .recipe-image {
-    width: 70%;
+    width: 100px;
+    height: 100px;
   }
   .loader {
     font-size: 10px;
@@ -116,22 +126,6 @@ ul {
   .ingredients {
     font-size: 18px;
   }
-
-  /* JUST FOR REFERENCE */
-
-  /* .recipes {
-    width: 90%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 5px;
-    gap: 5px;
-  }
-
-  .recipe {
-    width: 100%;
-  } */
-
-  /* //////// */
 }
 
 .video-tab {

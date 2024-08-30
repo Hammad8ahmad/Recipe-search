@@ -69,15 +69,35 @@ body {
   outline: none;
 }
 
+/* OLD STYLES WITH SMALL FONT */
+
+/* .form-input-material {
+  flex: 1;
+  height: 2.6rem;
+  width: 3.6rem;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.form-control-material {
+  width: 100%;
+  max-width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  font-size: 12px;
+  outline: none;
+ }    */
+
 .btn {
   padding: 10px;
   height: 2.6rem;
   border: none;
   background-color: #283618;
   font-weight: bolder;
-  color: white;
+  color: whitesmoke;
   cursor: pointer;
-  border: 0px solid black;
+  border: 1px solid black;
   border-radius: 5px;
 }
 
@@ -93,6 +113,9 @@ body {
   content: "Go!";
   color: white;
   font-weight: bolder;
+}
+.note {
+  display: none;
 }
 
 /* Responsive Styles */
@@ -132,6 +155,15 @@ body {
     padding-right: 2rem;
     margin: 0 auto;
     margin-bottom: 2rem;
+  }
+  .note {
+    display: block;
+    font-family: monospace;
+    width: 90%;
+    font-size: 10px;
+    font-weight: bolder;
+    color: red;
+    /* padding-bottom: 4rem; */
   }
 
   .header {

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./interface.css";
-import Items from "../Recipe components/items";
-import { fetchingRecipes } from "../Fetching files/fetchData";
-import fetchYouTubeVideos from "../Fetching files/fetchVideo";
+import Items from "../Recipes/items";
+import { fetchingRecipes } from "../Fetching/fetchData";
+import fetchYouTubeVideos from "../Fetching/fetchVideo";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
@@ -23,7 +23,6 @@ function Interface() {
     setData(recipeData);
 
     const recipeNames = extractRecipeNames(recipeData);
-    console.log(recipeNames);
     const videoData = await fetchVideosForRecipes(recipeNames);
     setVideoId(videoData);
 
@@ -50,9 +49,8 @@ function Interface() {
   };
 
   const fetchVideosForRecipes = async (recipeNames) => {
-    // const videoPromises = recipeNames.map((name) => fetchYouTubeVideos(name));
-    const videoResults = fetchYouTubeVideos(recipeNames);
-    // const videoResults = await Promise.all(videoPromises);
+    const videoPromises = recipeNames.map((name) => fetchYouTubeVideos(name));
+    const videoResults = await Promise.all(videoPromises);
     return videoResults;
   };
 
@@ -69,6 +67,8 @@ function Interface() {
       <form id="form" className="form" onSubmit={submitHandler}>
         <div className="form-input-material">
           <label htmlFor="recipeSearch">
+            {" "}
+            {/* htmlFor should match the id of the input */}
             <input
               ref={inputRef}
               type="text"

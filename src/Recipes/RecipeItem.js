@@ -16,8 +16,8 @@ function RecipeItem({ recipe, video }) {
         alt="cannot display:("
         className="recipe-image"
       />
-      <h3>Calories :{Math.round(calories)}g</h3>
-      <h3 className="ingredients-header">Ingredients :</h3>
+      <h3>Calories : {Math.round(calories)}g</h3>
+      <h3 className="ingredients-header">Ingredients : </h3>
       <ul>
         {ingredients.map((i, index) => (
           <li className="ingredients" key={index}>

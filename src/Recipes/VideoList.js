@@ -22,7 +22,7 @@ function VideoList({ videos }) {
         })
       ) : (
         <div className="no-videos-message">
-          API limit reached. No videos available :(
+          API limit reached.No videos available :(
         </div>
       )}
     </div>
