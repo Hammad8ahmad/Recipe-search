@@ -11,7 +11,7 @@ A responsive React-based web application to display a collection of recipes. Eac
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
-![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
+
 
 ## Demo
 
