@@ -17,6 +17,7 @@ A responsive React-based web application to display a collection of recipes. Eac
 
 You can check out a live demo of the project [here](https://recipe-search-io.netlify.app/).
 ![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
+![recipe](https://github.com/user-attachments/assets/4a68e74d-1e82-4de4-a301-d275b79fa26d)
 
 ## Features
 
@@ -59,4 +60,28 @@ Your application should now be running on `http://localhost:3000`.
 - The app is fully responsive and will adjust the layout and size of elements based on the screen size.
 
 ## Project Structure
+
+- **Fetching/**: Contains all the data fetching files for the recipes and youtube api.
+- **Interface/**: Contains the interface file and the related Css file for it.
+- **Recipes**: Contains all the information about the individual recipes.
+- **App.js**: Main component that renders the application.
+- **index.js**: Entry point of the application.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
+
+Please ensure your code adheres to the project's coding standards and includes appropriate documentation.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 
