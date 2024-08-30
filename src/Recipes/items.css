@@ -56,13 +56,28 @@ ul {
   list-style-type: disc;
   padding-left: 20px;
 }
-.no-videos-message {
+/* old styles */
+/* .no-videos-message {
   text-align: center;
   color: black;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   background-color: lightgreen;
   padding: 10px;
+} */
+
+.no-videos-message {
+  text-align: center;
+  color: #2d2d2d;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 600px;
 }
 
 .ingredients {
