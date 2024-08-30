@@ -46,7 +46,9 @@
 
 .recipe-image {
   border-radius: 50%;
-  max-width: 100%;
+  /* max-width: 100%; */
+  width: 150px;
+  height: 150px;
   border: 1px solid black;
   object-fit: cover;
   margin-bottom: 10px;
@@ -121,7 +123,8 @@ ul {
   }
 
   .recipe-image {
-    width: 70%;
+    width: 100px;
+    height: 100px;
   }
   .loader {
     font-size: 10px;
