@@ -3,6 +3,7 @@ import React from "react";
 import "./items.css";
 
 function VideoList({ videos }) {
+  console.log(videos);
   return (
     <div>
       {Array.isArray(videos) && videos.length > 0 ? (

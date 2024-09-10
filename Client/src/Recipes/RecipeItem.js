@@ -5,6 +5,7 @@ import "./items.css";
 
 function RecipeItem({ recipe, video }) {
   const { images, label, calories, ingredients } = recipe;
+  console.log(recipe);
   const { SMALL } = images;
 
   return (

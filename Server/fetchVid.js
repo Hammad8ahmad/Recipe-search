@@ -1,0 +1,17 @@
+import youtube from "./ytube.js";
+
+const fetchYouTubeVideos = async (query) => {
+  try {
+    const response = await youtube.get("/search", {
+      params: {
+        q: query,
+      },
+    });
+    return await response.data.items;
+  } catch (error) {
+    console.error("Error fetching YouTube videos:", error);
+    return [];
+  }
+};
+
+export default fetchYouTubeVideos;
