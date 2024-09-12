@@ -3,8 +3,8 @@ import React from "react";
 import RecipeList from "./RecipeList";
 import "./items.css";
 
-function Items({ data, videoId }) {
-  return <RecipeList data={data} videoId={videoId} />;
+function Items({ data,}) {
+  return <RecipeList data={data}  />;
 }
 
 export default Items;

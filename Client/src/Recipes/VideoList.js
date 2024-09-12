@@ -3,13 +3,13 @@ import React from "react";
 import "./items.css";
 
 function VideoList({ videos }) {
-  console.log(videos);
+  // console.log(videos);
   return (
     <div>
       {Array.isArray(videos) && videos.length > 0 ? (
         videos.map((video, index) => {
-          const { id } = video;
-          const videoSrc = `https://www.youtube-nocookie.com/embed/${id.videoId}`;
+          const id = video.videoId;
+          const videoSrc = `https://www.youtube-nocookie.com/embed/${id}`;
           return (
             <div className="video-tab" key={index}>
               <iframe

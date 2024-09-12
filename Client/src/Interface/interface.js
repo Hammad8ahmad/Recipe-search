@@ -3,11 +3,13 @@ import "./interface.css";
 import Items from "../Recipes/items";
 import { fetchingRecipes } from "../Fetching/fetchData";
 import fetchYouTubeVideos from "../Fetching/fetchVideo";
+import fetching from "../test";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
   const [data, setData] = useState(null);
   const [videoId, setVideoId] = useState(null);
+  const [submitted, setSubmitted] = useState(false); // New state to track form submission
   const inputRef = useRef(null);
 
   const submitHandler = async (e) => {
@@ -16,17 +18,13 @@ function Interface() {
     if (!recipe) {
       handleEmptyRecipeInput();
       return;
+    } else {
+      const recipeInfo = await fetching(recipe);
+      console.log("recipe info", recipeInfo);
+      setData(recipeInfo);
+      setSubmitted(true); // Set submitted to true
+      setRecipe("");
     }
-
-    resetInputStyles();
-    const recipeData = await fetchingRecipes(recipe);
-    setData(recipeData);
-
-    const recipeNames = extractRecipeNames(recipeData);
-    const videoData = await fetchVideosForRecipes(recipeNames);
-    setVideoId(videoData);
-
-    setRecipe("");
   };
 
   const handleEmptyRecipeInput = () => {
@@ -44,16 +42,6 @@ function Interface() {
     }
   };
 
-  const extractRecipeNames = (recipes) => {
-    return recipes.map((item) => item.recipe.label);
-  };
-
-  const fetchVideosForRecipes = async (recipeNames) => {
-    const videoPromises = recipeNames.map((name) => fetchYouTubeVideos(name));
-    const videoResults = await Promise.all(videoPromises);
-    return videoResults;
-  };
-
   return (
     <React.Fragment>
       <div className="title-container">
@@ -67,8 +55,6 @@ function Interface() {
       <form id="form" className="form" onSubmit={submitHandler}>
         <div className="form-input-material">
           <label htmlFor="recipeSearch">
-            {" "}
-            {/* htmlFor should match the id of the input */}
             <input
               ref={inputRef}
               type="text"
@@ -85,7 +71,8 @@ function Interface() {
           <span>Search</span>
         </button>
       </form>
-      <Items data={data} videoId={videoId} />
+      {submitted && <Items data={data} />}{" "}
+      {/* Conditionally render Items component */}
     </React.Fragment>
   );
 }

@@ -4,6 +4,7 @@ import { connectDB } from "./database/db.js";
 import Recipe from "./models/recipes.js";
 import fetchYouTubeVideos from "./fetchVid.js";
 import Video from "./models/videos.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,13 +13,15 @@ const appKey = "80bab0508a352ffd15e450386a26bc4c";
 const appId = "a9b30405";
 
 // Middleware to log requests
+app.use(express.json());
+app.use(cors());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-app.get("/fetch-recipes-videos", async (req, res) => {
-  const query = req.query.q; // Replace with dynamic query if needed
+app.post("/fetch-recipes-videos", async (req, res) => {
+  const query = req.body.query; // Replace with dynamic query if needed
 
   try {
     // Function to fetch recipes from the API
@@ -42,6 +45,7 @@ app.get("/fetch-recipes-videos", async (req, res) => {
     const recipeContent = recipes.map((recipe) => {
       const { label, images, calories, ingredients } = recipe.recipe;
       const image = images.SMALL.url;
+      console.log(image);
       const fixedIngredients = ingredients.map((ing) => ing.text);
 
       return {
@@ -108,13 +112,18 @@ app.get("/fetch-recipes-videos", async (req, res) => {
         savedVideos.push(newVideo); // Add saved video to the array
       }
     }
-
-    // Send response with saved recipes and videos
-    res.status(200).json({
-      message: "Data successfully added",
-      recipes: savedRecipes,
-      videos: savedVideos,
-    });
+    if (savedRecipes && savedVideos > 0) {
+      // Send response with saved recipes and videos
+      res.status(200).json({
+        message: "Data successfully added",
+        recipes: savedRecipes,
+        videos: savedVideos,
+      });
+    } else {
+      res.status(400).json({
+        message: "Plz type any recipe",
+      });
+    }
   } catch (error) {
     console.error("Error fetching or saving recipes:", error);
     res

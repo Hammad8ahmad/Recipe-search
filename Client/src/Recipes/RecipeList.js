@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import RecipeItem from "./RecipeItem";
 import "./items.css";
 
-function RecipeList({ data, videoId }) {
+function RecipeList({ data }) {
+  console.log("this is the recipe list data ", data);
+  const fullData = data ? data.existingRecipes : null;
+  console.log("this is the full data ", fullData);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (data === null || videoId === null) {
+    if (fullData === null || undefined) {
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, [data, videoId]);
+  }, [data]);
 
   return (
     <React.Fragment>
@@ -20,12 +24,12 @@ function RecipeList({ data, videoId }) {
         <div className="loader">YOU CURRENTLY HAVE NO SEARCHED RECIPES :)</div>
       ) : (
         <div className="recipes">
-          {data &&
-            data.map((item, index) => (
+          {fullData &&
+            fullData.map((item, index) => (
               <RecipeItem
                 key={index}
                 recipe={item.recipe}
-                video={Array.isArray(videoId) ? videoId[index] : []}
+                video={item.videos}
               />
             ))}
         </div>
