@@ -1,6 +1,7 @@
 const fetching = async (recipe) => {
   console.log(recipe);
-  const response = await fetch(`http://localhost:4000/fetch-recipes-videos`, {
+  const url = process.env.REACT_APP_API_URL;
+  const response = await fetch(`${url}fetch-recipes-videos`, {
     method: "POST",
     body: JSON.stringify({ query: recipe }),
     headers: {
