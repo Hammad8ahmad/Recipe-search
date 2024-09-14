@@ -1,4 +1,4 @@
-import youtube from "./ytube.js";
+import youtube from "./youtube.js";
 
 const fetchYouTubeVideos = async (query) => {
   try {

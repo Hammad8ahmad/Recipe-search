@@ -49,6 +49,9 @@
   border: 1px solid black;
   object-fit: cover;
   margin-bottom: 10px;
+  /* font-size: 16px;
+  padding-top: 50px;
+  text-align: center; */
 }
 
 ul {

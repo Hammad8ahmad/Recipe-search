@@ -1,29 +1,34 @@
 import React, { useState, useRef } from "react";
 import "./interface.css";
 import Items from "../Recipes/items";
-import { fetchingRecipes } from "../Fetching/fetchData";
-import fetchYouTubeVideos from "../Fetching/fetchVideo";
-import fetching from "../test";
+import fetching from "../Fetching/fetch";
+import MoonLoader from "react-spinners/MoonLoader";
 
 function Interface() {
   const [recipe, setRecipe] = useState("");
+  const [loading, setLoading] = useState(false); // Set and use loading state properly
   const [data, setData] = useState(null);
-  const [videoId, setVideoId] = useState(null);
-  const [submitted, setSubmitted] = useState(false); // New state to track form submission
   const inputRef = useRef(null);
-
+  console.log("checking renders");
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
 
     if (!recipe) {
       handleEmptyRecipeInput();
       return;
     } else {
-      const recipeInfo = await fetching(recipe);
-      console.log("recipe info", recipeInfo);
-      setData(recipeInfo);
-      setSubmitted(true); // Set submitted to true
-      setRecipe("");
+      setLoading(true); // Start loading when fetching data
+      try {
+        const recipeInfo = await fetching(recipe);
+        // console.log("recipe info", recipeInfo);
+        setData(recipeInfo);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      } finally {
+        setLoading(false); // Stop loading after fetching
+        setRecipe(""); // Clear input after fetching
+        resetInputStyles(); // Reset input styles after fetching
+      }
     }
   };
 
@@ -61,18 +66,27 @@ function Interface() {
               id="recipeSearch"
               name="recipeSearch"
               className="form-control-material"
-              placeholder="Enter your favourite dish, I'm sure we have it :)"
+              placeholder="Enter your favorite dish, I'm sure we have it :)"
               value={recipe}
-              onChange={(e) => setRecipe(e.target.value)}
+              onChange={(e) => setRecipe(e.target.value)} // Set recipe state on input change
             />
           </label>
         </div>
-        <button className="btn btn-primary btn-ghost" type="submit">
-          <span>Search</span>
+        <button
+          className="btn btn-primary btn-ghost"
+          type="submit"
+          disabled={loading}
+        >
+          <span>{loading ? "Loading..." : "Search"}</span>
         </button>
       </form>
-      {submitted && <Items data={data} />}{" "}
-      {/* Conditionally render Items component */}
+      {loading ? (
+        <div className="loader">
+          <MoonLoader />
+        </div>
+      ) : (
+        <Items data={data} />
+      )}
     </React.Fragment>
   );
 }

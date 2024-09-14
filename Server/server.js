@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express from "express"; // Ensure to import fetch if it's not already available in your environment
+import express from "express";
 import { connectDB } from "./database/db.js";
 import Recipe from "./models/recipes.js";
 import fetchYouTubeVideos from "./fetchVid.js";
@@ -9,8 +9,8 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-const appKey = "80bab0508a352ffd15e450386a26bc4c";
-const appId = "a9b30405";
+const appKey = process.env.EDAMAM_APP_KEY;
+const appId = process.env.EDAMAM_APP_ID;
 
 // Middleware to log requests
 app.use(express.json());
@@ -21,10 +21,10 @@ app.use((req, res, next) => {
 });
 
 app.post("/fetch-recipes-videos", async (req, res) => {
-  const query = req.body.query; // Replace with dynamic query if needed
+  const query = req.body.query;
 
   try {
-    // Function to fetch recipes from the API
+    // Function to fetch recipes from the external API
     const fetchingRecipes = async (query) => {
       try {
         const response = await fetch(
@@ -44,86 +44,103 @@ app.post("/fetch-recipes-videos", async (req, res) => {
     // Map recipes to extract the needed fields
     const recipeContent = recipes.map((recipe) => {
       const { label, images, calories, ingredients } = recipe.recipe;
-      const image = images.SMALL.url;
-      console.log(image);
+      const image = images.SMALL.url; // Get the image URL
       const fixedIngredients = ingredients.map((ing) => ing.text);
 
       return {
         label: label.toLowerCase(),
-        image,
+        image, // Include the image URL in the response
         calories,
         ingredients: fixedIngredients,
       };
     });
 
-    // Check for existing recipes in the database
-    const existingRecipes = [];
-    const newRecipes = [];
+    // Fetch existing recipes in a single query
+    const recipeLabels = recipeContent.map((recipe) => recipe.label);
+    const existingRecipes = await Recipe.find({ label: { $in: recipeLabels } });
+    const existingRecipeMap = new Map(
+      existingRecipes.map((recipe) => [recipe.label, recipe])
+    );
 
-    for (const recipe of recipeContent) {
-      const existingRecipe = await Recipe.findOne({ label: recipe.label });
+    // Filter out new recipes that do not exist in the database
+    const newRecipes = recipeContent.filter(
+      (recipe) => !existingRecipeMap.has(recipe.label)
+    );
 
-      if (existingRecipe) {
-        // Fetch the associated videos for the existing recipe
+    // Fetch associated videos for existing recipes
+    const existingRecipesWithVideos = await Promise.all(
+      existingRecipes.map(async (existingRecipe) => {
         const associatedVideos = await Video.find({
           recipeId: existingRecipe._id,
         });
-        existingRecipes.push({
-          recipe: existingRecipe,
-          videos: associatedVideos,
-        }); // Collect existing recipes with their videos
-      } else {
-        newRecipes.push(recipe); // Collect new recipes to be added
-      }
-    }
+        return { recipe: existingRecipe, videos: associatedVideos };
+      })
+    );
 
-    if (existingRecipes.length > 0) {
-      // Return existing recipes and their videos if found
-      return res.status(200).json({
-        message: "Some recipes already exist in the database.",
-        existingRecipes,
-      });
-    }
-
-    // Array to store saved videos
-    const savedVideos = [];
-
-    // Save new recipes to the database and fetch YouTube videos for each
-    const savedRecipes = [];
-    for (const recipe of newRecipes) {
-      // Save the new recipe
-      const newRecipe = new Recipe(recipe);
-      await newRecipe.save();
-      savedRecipes.push(newRecipe); // Collect saved recipes
-
-      // Fetch YouTube videos for the newly saved recipe
-      const mainLabel = newRecipe.label;
+    // Function to fetch and save YouTube videos for each recipe
+    const fetchAndSaveVideos = async (recipe) => {
+      const mainLabel = recipe.label;
       const videos = await fetchYouTubeVideos(mainLabel); // Fetch video data
 
-      for (const videoData of videos) {
-        const { videoId } = videoData.id; // Extract videoId from response
-        const { title } = videoData.snippet; // Extract title from snippet
+      return Promise.all(
+        videos.map(async (videoData) => {
+          const { videoId } = videoData.id; // Extract videoId from response
+          const { title } = videoData.snippet; // Extract title from snippet
 
-        // Create new video object with the recipe ID
-        const newVideo = new Video({ videoId, title, recipeId: newRecipe._id });
+          // Create new video object with the recipe ID
+          const newVideo = new Video({ videoId, title, recipeId: recipe._id });
 
-        // Save to database
-        await newVideo.save();
-        savedVideos.push(newVideo); // Add saved video to the array
-      }
-    }
-    if (savedRecipes && savedVideos > 0) {
-      // Send response with saved recipes and videos
-      res.status(200).json({
-        message: "Data successfully added",
-        recipes: savedRecipes,
-        videos: savedVideos,
-      });
-    } else {
-      res.status(400).json({
-        message: "Plz type any recipe",
-      });
-    }
+          // Save to database
+          await newVideo.save();
+          return newVideo;
+        })
+      );
+    };
+
+    // Save new recipes and fetch videos concurrently
+    const savedRecipes = await Promise.all(
+      newRecipes.map(async (recipe) => {
+        const newRecipe = new Recipe({
+          label: recipe.label,
+          calories: recipe.calories,
+          ingredients: recipe.ingredients,
+          // Do not include the image URL here
+        });
+        await newRecipe.save();
+        return newRecipe;
+      })
+    );
+
+    // Fetch and save videos for saved recipes
+    const savedRecipesWithVideos = await Promise.all(
+      savedRecipes.map(async (newRecipe) => {
+        const videos = await fetchAndSaveVideos(newRecipe);
+        return { recipe: newRecipe, videos: videos };
+      })
+    );
+
+    // Combine existing and new recipes with videos
+    const allRecipesWithVideos = [
+      ...existingRecipesWithVideos,
+      ...savedRecipesWithVideos,
+    ];
+
+    // Create a map of recipes to images for easy lookup
+    const recipeImagesMap = new Map(
+      recipeContent.map((recipe) => [recipe.label, recipe.image])
+    );
+
+    // Send response with combined recipes and images
+    res.status(200).json({
+      message: "Data successfully added or retrieved.",
+      recipes: allRecipesWithVideos.map((item) => ({
+        recipe: {
+          ...item.recipe.toObject(),
+          image: recipeImagesMap.get(item.recipe.label),
+        },
+        videos: item.videos,
+      })),
+    });
   } catch (error) {
     console.error("Error fetching or saving recipes:", error);
     res

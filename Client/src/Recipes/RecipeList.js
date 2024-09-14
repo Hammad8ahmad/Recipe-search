@@ -1,22 +1,20 @@
-// RecipeList.js
 import React, { useEffect, useState } from "react";
 import RecipeItem from "./RecipeItem";
 import "./items.css";
 
 function RecipeList({ data }) {
-  console.log("this is the recipe list data ", data);
-  const fullData = data ? data.existingRecipes : null;
-  console.log("this is the full data ", fullData);
+  const fullData = data ? data.existingRecipes || data.recipes : null; // Extract the recipes from data
 
   const [loading, setLoading] = useState(true);
-
+  console.log(fullData);
   useEffect(() => {
-    if (fullData === null || undefined) {
+    if (!fullData || fullData.length === 0) {
+      // Correct checks for data loading state
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, [data]);
+  }, [fullData]); // Run the effect only when `fullData` changes
 
   return (
     <React.Fragment>
