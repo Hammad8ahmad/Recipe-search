@@ -181,10 +181,10 @@ app.use((req, res, next) => {
 const fetchRecipes = async (query) => {
   try {
     const response = await fetch(
-      `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${appId}&app_key=${appKey}&from=0&to=5`
+      `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${appId}&app_key=${appKey}`
     );
     const data = await response.json();
-    return data.hits;
+    return data.hits.slice(0, 5);
     // console.log(data.hits);
   } catch (error) {
     console.error("Error fetching recipes:", error);
@@ -212,6 +212,7 @@ app.post("/fetch-recipes-videos", async (req, res) => {
   try {
     // Fetch and process recipes
     const recipes = await fetchRecipes(query);
+    console.log(recipes);
     const recipeContent = processRecipes(recipes);
 
     const recipeLabels = recipeContent.map((recipe) => recipe.label);
