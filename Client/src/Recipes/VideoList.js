@@ -9,10 +9,11 @@ function VideoList({ videos }) {
       {Array.isArray(videos) && videos.length > 0 ? (
         videos.map((video, index) => {
           const id = video.videoId;
-          const videoSrc = `https://www.youtube-nocookie.com/embed/${id}`;
+          const videoSrc = `https://www.youtube.com/embed/${id}`;
           return (
             <div className="video-tab" key={index}>
               <iframe
+                loading="lazy"
                 className="youtube-video"
                 src={videoSrc}
                 allowFullScreen
