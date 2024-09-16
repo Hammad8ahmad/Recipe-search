@@ -1,6 +1,5 @@
-const APP_KEY = process.env.REACT_APP_EDAMAM_APP_KEY;
-const APP_ID = process.env.REACT_APP_EDAMAM_APP_ID;
-
+const APP_KEY = "a9b30405";
+const APP_ID = "80bab0508a352ffd15e450386a26bc4c";
 export const fetchingRecipes = async (query) => {
   try {
     const response = await fetch(
