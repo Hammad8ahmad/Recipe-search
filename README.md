@@ -14,7 +14,8 @@ A responsive React-based web application to display a collection of recipes. Eac
 
 ## Demo
 
-You can check out a live demo of the project [here](https://recipe-search-io.netlify.app/).NOTE : If you cannot see the live version it is probably because my render free tier expired but you can see the live version below and how it worked.
+You can check out a live demo of the project [here](https://recipe-search-io.netlify.app/).
+NOTE : If you cannot see the live version it is probably because my render free tier expired but you can see the live version below and how it worked.
 ![recipe-search](https://github.com/user-attachments/assets/1fd00050-1ae3-400c-a51a-64dae24000a6)
 
 ## Example:
